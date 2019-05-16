@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.farm.dao.CategoryDao">
+	<resultMap type="com.farm.model.Category" id="baseEntityMap">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="treeCode" property="treecode"/>
+	</resultMap>
+	
+	<sql id="Base_Columns">
+		id, name, treeCode
+	</sql>
+	
+	<select id="getById" parameterType="java.lang.Integer" resultMap="baseEntityMap">
+		select <include refid="Base_Columns" />
+		from category
+		where 
+			id = #{id}
+	</select>
+	
+	<select id="queryList" parameterType="com.farm.query.CategoryQuery" resultMap="baseEntityMap">
+		select <include refid="Base_Columns" />
+		from category
+	</select>
+	
+	<select id="getByName" parameterType="java.lang.String" resultMap="baseEntityMap">
+		select <include refid="Base_Columns" />
+		from category
+		where 
+		name = #{name}
+	</select>
+	
+	<insert id="add" parameterType="com.farm.model.Category">
+		insert into category
+			(id, name, treeCode)
+		values 
+			(#{id}, #{name}, #{treecode})
+	</insert>
+	
+	<update id="edit" parameterType="com.farm.model.Category">
+		update category
+		set
+			name = #{name},
+			treeCode = #{treecode}
+		where
+			id = #{id}
+	</update>
+
+
+	<select id="queryAllList" resultMap="baseEntityMap">
+		select <include refid="Base_Columns" />
+		from category
+	</select>
+
+
+	<select id="selectByEntity" resultMap="baseEntityMap" parameterType="com.farm.model.Category" >
+		select
+		<include refid="Base_Columns" />
+		from category
+		<if test="name != null" >
+			<where>
+				and name = #{name}
+			</where>
+		</if>
+	</select>
+
+	<update id="deleteById" parameterType="java.lang.Integer">
+	  delete from 	category  where id = #{id}
+	</update>
+</mapper>

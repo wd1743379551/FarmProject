@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.farm.dao.VarietyDao">
+	<resultMap type="com.farm.model.Variety" id="baseEntityMap">
+		 
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="url" property="url"/>
+		<result column="status" property="status"/>
+	</resultMap>
+	
+	<sql id="Base_Columns">
+		id, name, url, status
+	</sql>
+	
+	<select id="getById" parameterType="java.lang.Integer" resultMap="baseEntityMap">
+		select <include refid="Base_Columns" />
+		from variety
+		where 
+			id = #{id}
+	</select>
+	
+	<select id="queryList" parameterType="com.farm.query.VarietyQuery" resultMap="baseEntityMap">
+		select <include refid="Base_Columns" />
+		from variety
+	</select>
+	
+	<insert id="add" parameterType="com.farm.model.Variety">
+		insert into variety
+			(id, name, url, status)
+		values 
+			(#{id}, #{name}, #{url}, #{status})
+	</insert>
+	
+	<update id="edit" parameterType="com.farm.model.Variety">
+		update variety
+		set
+			name = #{name},
+			url = #{url},
+			status = #{status}
+		where
+			id = #{id}
+	</update>
+</mapper>

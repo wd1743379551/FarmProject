@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.farm.dao.SubjectDao">
+	<resultMap type="com.farm.model.Subject" id="baseEntityMap">
+		 
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="url" property="url"/>
+		<result column="status" property="status"/>
+	</resultMap>
+	
+	<sql id="Base_Columns">
+		id, name, url, status
+	</sql>
+	
+	<select id="getById" parameterType="java.lang.Integer" resultMap="baseEntityMap">
+		select <include refid="Base_Columns" />
+		from subject
+		where 
+			id = #{id}
+	</select>
+	
+	<select id="queryList" parameterType="com.farm.query.SubjectQuery" resultMap="baseEntityMap">
+		select <include refid="Base_Columns" />
+		from subject
+	</select>
+	
+	<insert id="add" parameterType="com.farm.model.Subject">
+		insert into subject
+			(id, name, url, status)
+		values 
+			(#{id}, #{name}, #{url}, #{status})
+	</insert>
+	
+	<update id="edit" parameterType="com.farm.model.Subject">
+		update subject
+		set
+			name = #{name},
+			url = #{url},
+			status = #{status}
+		where
+			id = #{id}
+	</update>
+
+	<select id="findAll" resultMap="baseEntityMap">
+
+	  select * from subject
+	</select>
+</mapper>

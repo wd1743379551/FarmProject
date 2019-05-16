@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 	xmlns:context="http://www.springframework.org/schema/context"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+							  http://www.springframework.org/schema/beans/spring-beans.xsd
+							  http://www.springframework.org/schema/context
+							  http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 导入jdbc配置文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	<!-- 配置C3P0 -->
+	<!-- 配置Druid连接池 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		  init-method="init" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.user}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="1" />
+		<property name="minIdle" value="1" />
+		<property name="maxActive" value="10" />
+
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="10000" />
+
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+
+		<property name="testWhileIdle" value="true" />
+
+		<!-- 这里建议配置为TRUE，防止取到的连接不可用 -->
+		<property name="testOnBorrow" value="true" />
+		<property name="testOnReturn" value="false" />
+
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize"
+				  value="20" />
+
+		<!-- 这里配置提交方式，默认就是TRUE，可以不用配置 -->
+
+		<property name="defaultAutoCommit" value="true" />
+
+		<!-- 验证连接有效与否的SQL，不同的数据配置不同 -->
+		<property name="validationQuery" value="select 1 " />
+		<property name="filters" value="stat" />
+	<!--	<property name="proxyFilters">
+			<list>
+				<ref bean="logFilter" />
+			</list>
+		</property>-->
+	</bean>
+
+
+		<!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+	         <property name="driverClass" value="${jdbc.driver}" />
+	         <property name="jdbcUrl" value="${jdbc.url}" />
+	         <property name="user" value="${jdbc.user}" />
+             <property name="password" value="${jdbc.password}" />
+	         <property name="checkoutTimeout" value="30000" />
+	         <property name="maxPoolSize" value="15" />
+	         <property name="idleConnectionTestPeriod" value="180" />
+	         <property name="maxIdleTime" value="180" />
+	    </bean>-->
+	<!--配置sqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:spring/mybatis-config.xml"></property>
+		<!--注入数据库链接 -->
+		<property name="dataSource" ref="dataSource"/>
+		<!--扫描包 配置别名 -->
+		<property name="typeAliasesPackage" value="com.farm.model" />
+		<!--扫描包配置sqlmapper文件 -->
+		<property name="mapperLocations" value="classpath:mapper/*.xml" />
+		<!--<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageInterceptor">
+					<property name="properties">
+						&lt;!&ndash;使用下面的方式配置参数，一行配置一个 &ndash;&gt;
+						<value>
+							reasonable=true
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property>-->
+	</bean>
+
+	<!--配置动态实现dao接口注入spring -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!--注入sqlSessionFactory -->
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+		<!--basePackage指定要扫描的包，在此包之下的映射器都会被 搜索到。可指定多个包，包与包之间用逗号或分号分隔 -->
+		<property name="basePackage" value="com.farm.dao" />
+	</bean>
+</beans>

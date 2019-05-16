@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.farm.dao.ClassifyDao">
+	<resultMap type="com.farm.model.Classify" id="baseEntityMap">		 
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="treeCode" property="treecode"/>
+		<result column="category_id" property="categoryId"/>
+	</resultMap>
+	
+	<resultMap type="com.farm.model.Classify" id="hasNewsMap">		 
+		<id column="cid" property="id"/>
+		<result column="name" property="name"/>
+		<result column="treeCode" property="treecode"/>
+		<result column="c_category_id" property="categoryId"/>
+		<collection property="newsList" ofType="com.farm.model.News">
+			<id column="id" property="id"/>
+			<result column="title" property="title"/>
+			<result column="content" property="content"/>
+			<result column="classify" property="classify"/>
+			<result column="province" property="province"/>
+			<result column="subject" property="subject"/>
+			<result column="category" property="category"/>
+			<result column="classify_id" property="classifyId"/>
+			<result column="category_id" property="categoryId"/>
+			<result column="url" property="url"/>
+			<result column="pic" property="pic"/>
+			<result column="status" property="status"/>
+			<result column="sort" property="sort"/>
+		</collection>
+	</resultMap>
+	
+	<select id="getNewsById" parameterType="com.farm.model.Classify" resultMap="hasNewsMap">
+		select c.id as cid, c.name, c.treeCode, c.category_id as c_category_id,n.*
+		from classify c
+		right join news n on n.classify_id = c.id
+		where c.category_id = #{categoryId}
+		and
+		c.id = #{id}
+		order by c.id
+		limit 0,3;
+	</select>
+	
+	<sql id="Base_Columns">
+		id, name, treeCode, category_id
+	</sql>
+	
+	<select id="getById" parameterType="java.lang.Integer" resultMap="baseEntityMap">
+		select <include refid="Base_Columns" />
+		from classify
+		where 
+			id = #{id}
+	</select>
+	
+	<select id="getByTreeCode" parameterType="java.lang.String" resultMap="baseEntityMap">
+		select <include refid="Base_Columns" />
+		from classify
+		where 
+			treeCode = #{treeCode}
+	</select>
+	
+	<select id="getBycategoryId" parameterType="java.lang.Integer" resultMap="baseEntityMap">
+		select <include refid="Base_Columns" />
+		from classify
+		where 
+			category_id = #{categoryId}
+	</select>
+	
+	<select id="queryList" parameterType="com.farm.query.ClassifyQuery" resultMap="baseEntityMap">
+		select <include refid="Base_Columns" />
+		from classify
+	</select>
+	
+	<insert id="add" parameterType="com.farm.model.Classify">
+		insert into classify
+			(id, name, treeCode, category_id)
+		values 
+			(#{id}, #{name}, #{treecode}, #{categoryId})
+	</insert>
+	
+	<update id="edit" parameterType="com.farm.model.Classify">
+		update classify
+		set
+			name = #{name},
+			treeCode = #{treecode},
+			category_id = #{categoryId}
+		where
+			id = #{id}
+	</update>
+
+	<select id="findALl" resultMap="baseEntityMap">
+		select * from classify
+	</select>
+
+	<update id="deleteById" parameterType="java.lang.Integer">
+		delete
+		from classify
+		where
+		id = #{id}
+	</update>
+
+	<select id="queryAllList" resultMap="baseEntityMap">
+		select * from classify
+	</select>
+
+	<select id="selectByEntity" parameterType="com.farm.model.Classify" resultMap="baseEntityMap">
+		select
+		<include refid="Base_Columns" />
+		from classify
+		<if test="name != null" >
+			<where>
+				and name = #{name}
+			</where>
+		</if>
+		<if test="categoryId != null" >
+			<where>
+				and category_id = #{categoryId}
+			</where>
+		</if>
+	</select>
+
+</mapper>

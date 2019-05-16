@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.farm.dao.NewsDao">
+	<resultMap type="com.farm.model.News" id="baseEntityMap">
+		 
+		<id column="id" property="id"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="classify" property="classify"/>
+		<result column="province" property="province"/>
+		<result column="subject" property="subject"/>
+		<result column="category" property="category"/>
+		<result column="classify_id" property="classifyId"/>
+		<result column="category_id" property="categoryId"/>
+		<result column="url" property="url"/>
+		<result column="pic" property="pic"/>
+		<result column="status" property="status"/>
+		<result column="sort" property="sort"/>
+		<result column="subjectName" property="subjectName"/>
+	</resultMap>
+	
+	<sql id="Base_Columns">
+		id, title, content, classify, province, subject, category, classify_id, category_id, url, pic, status, sort
+	</sql>
+	
+	<select id="getByTitle" parameterType="java.lang.String" resultMap="baseEntityMap">
+		select <include refid="Base_Columns" />
+		from news
+		where 
+			title like CONCAT('%',#{title},'%')
+	</select>
+	
+	<select id="getByClassifyId" parameterType="java.lang.Integer" resultMap="baseEntityMap">
+		select <include refid="Base_Columns" />
+		from news
+		where 
+			classify_id = #{id}
+	</select>
+	
+	<select id="getById" parameterType="java.lang.Integer" resultMap="baseEntityMap">
+		select <include refid="Base_Columns" />
+		from news
+		where 
+			id = #{id}
+	</select>
+	
+	<select id="queryList" parameterType="com.farm.query.NewsQuery" resultMap="baseEntityMap">
+		select <include refid="Base_Columns" />
+		from news
+	</select>
+	
+	<insert id="add" parameterType="com.farm.model.News">
+		insert into news
+			(id, title, content, classify, province, subject, category, classify_id, category_id, url, pic, status, sort)
+		values 
+			(#{id}, #{title}, #{content}, #{classify}, #{province}, #{subject}, #{category}, #{classifyId}, #{categoryId}, #{url}, #{pic}, #{status}, #{sort})
+	</insert>
+	
+	<update id="edit" parameterType="com.farm.model.News">
+		update news
+		set
+			title = #{title},
+			content = #{content},
+			classify = #{classify},
+			province = #{province},
+			subject = #{subject},
+			category = #{category},
+			classify_id = #{classifyId},
+			category_id = #{categoryId},
+			url = #{url},
+			pic = #{pic},
+			status = #{status},
+			sort = #{sort}
+		where
+			id = #{id}
+	</update>
+
+	<select id="findAllNews" resultMap="baseEntityMap">
+		select n.*,s.name as subjectName from news n inner join subject s on n.subject = s.id
+	</select>
+
+	<select id="findOne" resultMap="baseEntityMap" parameterType="java.lang.Integer">
+		select n.*,s.name as subjectName from news n inner join subject s on n.subject = s.id
+		where n.id = #{id}
+	</select>
+
+	<select id="selectByEntity" parameterType="com.farm.model.News" resultMap="baseEntityMap">
+		select n.*,s.name as subjectName from news n inner join subject s on n.subject = s.id
+		<if test="title != null" >
+			<where>
+				and n.title = #{title}
+			</where>
+		</if>
+	</select>
+
+	<update id="deleteById">
+		delete from news where id = #{id}
+	</update>
+</mapper>
