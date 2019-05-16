@@ -71,5 +71,10 @@ public class ClassifyServiceImpl extends BaseServiceImpl<Classify, ClassifyDao> 
         PageInfo<Classify> pageInfo = new PageInfo<Classify>(list);
         return new PageResult(pageInfo.getTotal(), pageInfo.getList());
     }
+
+    @Override
+    public List<Classify> findClassifyByCategory(Integer categoryId) {
+        return dao.findClassifyByCategory(categoryId);
+    }
 }
 

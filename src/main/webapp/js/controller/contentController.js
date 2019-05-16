@@ -1,5 +1,5 @@
  //控制层 
-app.controller('contentController' ,function($scope,$controller,$http ,uploadService,contentCategoryService  ,contentService){
+app.controller('contentController' ,function($scope,$controller,$http ,uploadService,contentCategoryService  ,contentService,classifyService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -96,13 +96,21 @@ app.controller('contentController' ,function($scope,$controller,$http ,uploadSer
 			}
 		});
 	}
-	
+
+	// 查询所有一级分类
+	$scope.findAllCategory = function(){
+		contentCategoryService.findAll().success(function(response){
+			$scope.categoryList = response;
+		});
+	}
+
+
 	// 查询所有广告分类
-	$scope.findAllClassify = function(){
+/*	$scope.findAllClassify = function(){
         $http.get('../classify/findAll.do').success(function(response){
             $scope.classifyList = response;
         });
-    }
+    }*/
 
     // 查询所有专题
     $scope.findAllSubject = function(){
@@ -110,6 +118,13 @@ app.controller('contentController' ,function($scope,$controller,$http ,uploadSer
             $scope.subjectList = response;
         });
     }
-	
+
+    //根据一级分类查二级分类
+    $scope.changeCategory = function(categoryId){
+		classifyService.findClassifyByCategory(categoryId).success(function(response){
+			$scope.classifyList = response;
+		});
+	}
+
 	$scope.status = ["不显示","显示"];
 });	

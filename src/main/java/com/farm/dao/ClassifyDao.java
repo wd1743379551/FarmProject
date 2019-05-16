@@ -22,5 +22,7 @@ public interface ClassifyDao extends BaseDao<Classify> {
     List<Classify> queryAllList();
 
     List<Classify> selectByEntity(Classify classify);
+
+    List<Classify> findClassifyByCategory(Integer categoryId);
 }
 

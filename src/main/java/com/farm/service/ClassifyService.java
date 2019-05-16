@@ -30,5 +30,7 @@ public interface ClassifyService extends BaseService<Classify> {
 	void deleteByIds(Integer[] ids);
 
 	PageResult findPage(Classify classify, int page, int rows);
+
+    List<Classify> findClassifyByCategory(Integer categoryId);
 }
 

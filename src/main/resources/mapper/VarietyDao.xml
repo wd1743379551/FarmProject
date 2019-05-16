@@ -41,4 +41,28 @@
 		where
 			id = #{id}
 	</update>
+
+	<select id="queryAllList" resultMap="baseEntityMap">
+		select * from variety
+	</select>
+
+	<update id="deleteById" parameterType="java.lang.Integer">
+		delete from variety where id = #{id}
+	</update>
+
+	<select id="selectByEntity" resultMap="baseEntityMap">
+		select
+		<include refid="Base_Columns" />
+		from category
+		<if test="name != null" >
+			<where>
+				and name = #{name}
+			</where>
+		</if>
+		<if test="url != null" >
+			<where>
+				and url like "%"#{name}"%"
+			</where>
+		</if>
+	</select>
 </mapper>

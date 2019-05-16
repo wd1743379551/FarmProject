@@ -3,7 +3,7 @@ package com.farm.enumerate;
 /**
  * 结果常量类
  *
- * @author LiuXianTing
+ * @author
  */
 public enum ResultConstantsEnum {
 
