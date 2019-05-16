@@ -33,7 +33,7 @@
 	<select id="getNewsById" parameterType="com.farm.model.Classify" resultMap="hasNewsMap">
 		select c.id as cid, c.name, c.treeCode, c.category_id as c_category_id,n.*
 		from classify c
-		right join news n on n.classify_id = c.id
+		right join news n on n.classify_id = c.id and n.status = 1
 		where c.category_id = #{categoryId}
 		and
 		c.id = #{id}

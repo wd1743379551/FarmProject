@@ -28,6 +28,7 @@
 		from news
 		where 
 			title like CONCAT('%',#{title},'%')
+			and status = 1
 	</select>
 	
 	<select id="getByClassifyId" parameterType="java.lang.Integer" resultMap="baseEntityMap">
@@ -35,6 +36,7 @@
 		from news
 		where 
 			classify_id = #{id}
+			and status = 1
 	</select>
 	
 	<select id="getById" parameterType="java.lang.Integer" resultMap="baseEntityMap">

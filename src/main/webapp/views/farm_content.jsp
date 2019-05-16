@@ -93,6 +93,9 @@
 															<div class="TRS_Editor">
 																<p>${n.content }</p>
 															</div>
+															<c:if test="${not empty n.pic }">
+																<img alt="新闻图片" src="${n.pic }">
+															</c:if>
 															<div align="center" style="padding-top:60px;">
 																<script language="javascript">
 																	var currentPage = 0; //所在页从0开始
