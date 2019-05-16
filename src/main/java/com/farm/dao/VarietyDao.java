@@ -2,6 +2,8 @@ package com.farm.dao;
 
 import com.farm.model.Variety;
 
+import java.util.List;
+
 /**
  * dao
  * 
@@ -9,6 +11,9 @@ import com.farm.model.Variety;
  * @author 
  */
 public interface VarietyDao extends BaseDao<Variety> {
-	
+
+    List<Variety> queryAllList();
+
+    List<Variety> selectByEntity(Variety variety);
 }
 
