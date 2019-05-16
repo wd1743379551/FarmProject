@@ -53,7 +53,7 @@
 	<select id="selectByEntity" resultMap="baseEntityMap">
 		select
 		<include refid="Base_Columns" />
-		from category
+		from variety
 		<if test="name != null" >
 			<where>
 				and name = #{name}

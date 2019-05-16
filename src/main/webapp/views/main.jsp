@@ -179,7 +179,7 @@
                                 </a>
                             </li>
                             <li id="admin-login">
-                                <a href="content.html" target="iframe">
+                                <a href="${pageContext.request.contextPath}/admin/variety.html" target="iframe">
                                     <i class="fa fa-circle-o"></i>品种管理
                                 </a>
                             </li>

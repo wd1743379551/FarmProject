@@ -8,7 +8,10 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import com.farm.model.User;
 
-
+/**
+ *
+ * 登陆拦截器 sprimmvc
+ */
 public class LoginInterceptor implements HandlerInterceptor{
 
 	public boolean preHandle(HttpServletRequest request,
@@ -23,6 +26,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 		User user = (User) request.getSession().getAttribute("User");
 		//3、为空，未登陆，回到登陆页面
 		if (user == null) {
+			//如果用户未登录user=null，跳转到登陆页面
 			String contextPath = request.getContextPath();
 			response.sendRedirect(contextPath + "/views/login.jsp");
 			return false;

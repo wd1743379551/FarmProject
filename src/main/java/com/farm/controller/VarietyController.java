@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.farm.model.Variety;
 import com.farm.service.VarietyService;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ import java.util.List;
  * @author 
  * @version  	 
  */
-@Controller
+@RestController
 @RequestMapping("variety")
 public class VarietyController {
 	

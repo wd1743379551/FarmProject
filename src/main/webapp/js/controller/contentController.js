@@ -77,9 +77,11 @@ app.controller('contentController' ,function($scope,$controller,$http ,uploadSer
 	$scope.searchEntity={};//定义搜索对象 
 	
 	//搜索
-	$scope.search=function(page,rows){			
+	$scope.search=function(page,rows){	
+		//调用后台接口  当前页，每页显示条数，查询条件封装
 		contentService.search(page,rows,$scope.searchEntity).success(
 			function(response){
+				//response=后台返回数据
 				$scope.list=response.rows;
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
