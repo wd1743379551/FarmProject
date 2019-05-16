@@ -39,6 +39,13 @@ public class LoginController {
         }       
         return "login";
     }
+
+    //用户注销
+    @RequestMapping("logout")
+    public String logout( HttpSession session,HttpServletRequest req) throws ParseException{
+        session.removeAttribute("User");
+        return "login";
+    }
     
     //跳转到后台管理主页面
     @RequestMapping("main")

@@ -30,7 +30,20 @@ public class ClassifyController {
 	
 	@Autowired
 	private ClassifyService ClassifyService;
-	
+
+	/**
+	 * 进入列表页
+	 *
+	 * @author
+	 * @param
+	 * @return
+	 */
+	@RequestMapping("findClassifyByCategory")
+	public List<Classify> findClassifyByCategory(Integer categoryId) {
+		return ClassifyService.findClassifyByCategory(categoryId);
+	}
+
+
 	/**
 	 * 进入列表页
 	 *

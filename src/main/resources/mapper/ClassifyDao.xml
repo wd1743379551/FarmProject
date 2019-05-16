@@ -119,4 +119,8 @@
 		</if>
 	</select>
 
+	<select id="findClassifyByCategory" parameterType="java.lang.Integer" resultMap="baseEntityMap">
+		select * from classify
+		where category_id = #{categoryId}
+	</select>
 </mapper>

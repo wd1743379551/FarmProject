@@ -28,5 +28,9 @@ app.service('classifyService',function($http){
 	//搜索
 	this.search=function(page,rows,searchEntity){
 		return $http.post('../classify/search.do?page='+page+"&rows="+rows, searchEntity);
-	}    	
+	}
+	//搜索
+	this.findClassifyByCategory=function(categoryId){
+		return $http.post('../classify/findClassifyByCategory.do?categoryId='+categoryId);
+	}
 });

@@ -24,13 +24,14 @@
     <script type="text/javascript" src="../js/base_pagination.js"></script>
     <script type="text/javascript" src="../js/service/contentService.js"></script>
     <script type="text/javascript" src="../js/service/contentCategoryService.js"></script>
+    <script type="text/javascript" src="../js/service/classifyService.js"></script>
     <script type="text/javascript" src="../js/service/uploadService.js"></script>
     <script type="text/javascript" src="../js/controller/baseController.js"></script>
     <script type="text/javascript" src="../js/controller/contentController.js"></script>
 
 </head>
 <body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="contentController"
-      ng-init="findAllClassify();findAllSubject()">
+      ng-init="findAllCategory();findAllSubject()">
 <!-- .box-body -->
 <div class="box-header with-border">
     <h3 class="box-title">管理</h3>
@@ -119,14 +120,21 @@
             <div class="modal-body">
                 <table class="table table-bordered table-striped" width="800px">
                     <tr>
-                        <td>新闻分类</td>
+                        <td>新闻一级分类</td>
+                        <td>
+                            <select class="form-control" ng-model="entity.categoryId"
+                                    ng-options="item.id as item.name for item in categoryList" ng-change="changeCategory(entity.categoryId)"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>新闻二级分类</td>
                         <td>
                             <select class="form-control" ng-model="entity.classifyId"
                                     ng-options="item.id as item.name for item in classifyList"></select>
                         </td>
                     </tr>
-                    <tr>
 
+                    <tr>
                         <td>所属专题</td>
                         <td>
                             <select class="form-control" ng-model="entity.subject"
