@@ -150,6 +150,7 @@ public class ClassifyController {
 	 * @return
 	 */
 	@RequestMapping("/search")
+	//分页
 	public PageResult search(@RequestBody Classify classify, int page, int rows  ){
 		return ClassifyService.findPage(classify, page, rows);
 	}

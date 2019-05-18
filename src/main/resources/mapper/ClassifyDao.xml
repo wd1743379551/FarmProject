@@ -17,7 +17,7 @@
 			<id column="id" property="id"/>
 			<result column="title" property="title"/>
 			<result column="content" property="content"/>
-			<result column="classify" property="classify"/>
+			<result column="classify" property="classifyi"/>
 			<result column="province" property="province"/>
 			<result column="subject" property="subject"/>
 			<result column="category" property="category"/>
@@ -70,7 +70,8 @@
 		select <include refid="Base_Columns" />
 		from classify
 	</select>
-	
+	<!-- 添加sql
+	-->
 	<insert id="add" parameterType="com.farm.model.Classify">
 		insert into classify
 			(id, name, treeCode, category_id)

@@ -20,6 +20,7 @@ app.controller('newsController' ,function($scope,$controller,contentCategoryServ
 	
 	//搜索
 	$scope.search=function(page,rows){
+		//分页搜索
 		newsService.search(page,rows,$scope.searchEntity).success(
 			function(response){
 				$scope.list=response.rows;

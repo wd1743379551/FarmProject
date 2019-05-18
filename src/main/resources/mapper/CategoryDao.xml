@@ -32,7 +32,7 @@
 	
 	<insert id="add" parameterType="com.farm.model.Category">
 		insert into category
-			(id, name, treeCode)
+			(id, name, treeCode,)
 		values 
 			(#{id}, #{name}, #{treecode})
 	</insert>
