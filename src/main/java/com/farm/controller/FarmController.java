@@ -51,10 +51,9 @@ public class FarmController {
             }           
         }
         for (Classify classify : clsNews) {
-            if (classify.getTreecode() != null) {
                 request.setAttribute(classify.getTreecode(), classify);
             }
-        }
+
         request.setAttribute("categoryList", categoryService.queryList(new BaseQuery()));
         return "farm_main";
     }

@@ -1,5 +1,5 @@
 app.service("uploadService",function($http){
-	
+	//前端 上传文件的js
 	this.uploadFile = function(){
 		// 向后台传递数据:
 		var formData = new FormData();

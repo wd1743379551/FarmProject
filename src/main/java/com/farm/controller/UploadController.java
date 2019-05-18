@@ -18,7 +18,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("upload")
 public class UploadController {
-
+    // 后台文件上传代码
     @RequestMapping("uploadFile")
     @ResponseBody
     public Map uploadFile(MultipartFile file, HttpServletRequest request){
