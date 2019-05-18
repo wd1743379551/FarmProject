@@ -1,6 +1,7 @@
 package com.farm.controller;
 
 import com.farm.model.Category;
+import com.farm.model.Classify;
 import com.farm.model.PageResult;
 import com.farm.model.Result;
 import com.farm.service.CategoryService;
@@ -42,7 +43,15 @@ public class NewsController {
 	public List<News> index() {
 		return NewsService.findAll();
 	}
-
+	
+	/**
+     * 返回全部列表
+     * @return
+     */
+    @RequestMapping("/findPage")
+    public PageResult findPage(int page, int rows,Classify classify){
+        return NewsService.findPage(page, rows);
+    }
 
 	/**
 	 * 查询一个
