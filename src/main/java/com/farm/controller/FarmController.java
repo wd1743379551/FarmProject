@@ -51,8 +51,10 @@ public class FarmController {
             }           
         }
         for (Classify classify : clsNews) {
-            request.setAttribute(classify.getTreecode(), classify);
-        }      
+            if (classify.getTreecode() != null) {
+                request.setAttribute(classify.getTreecode(), classify);
+            }
+        }
         request.setAttribute("categoryList", categoryService.queryList(new BaseQuery()));
         return "farm_main";
     }
@@ -70,6 +72,7 @@ public class FarmController {
             newsList = newService.getByClassifyId(cs.getId());
         }    
         request.setAttribute("newsList", newsList);
+        request.setAttribute("categoryList", categoryService.queryList(new BaseQuery()));
         return "farm_page";
     }
     
@@ -78,6 +81,7 @@ public class FarmController {
     public String toContentPage(News news,HttpServletRequest request) {    
         News n = newService.getById(news.getId());
         request.setAttribute("n", n);
+        request.setAttribute("categoryList", categoryService.queryList(new BaseQuery()));
         return "farm_content";
     }
     

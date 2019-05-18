@@ -70,7 +70,10 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category, CategoryDao> 
         }
     }
 
-
+/*
+* 数据库的分页查询
+* mysql的分页查询要用limit
+* */
     @Override
     public PageResult findPage(Category contentCategory, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);

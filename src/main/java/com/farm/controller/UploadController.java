@@ -22,7 +22,7 @@ public class UploadController {
     @RequestMapping("uploadFile")
     @ResponseBody
     public Map uploadFile(MultipartFile file, HttpServletRequest request){
-        // 获取文件名   后面事获取文件格式
+        // 获取文件名   后面事获取文件格式 时间+命名
         String fileName = new Date().getTime() + file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));
         // 获取文件上传的路径
         String path = request.getSession().getServletContext().getRealPath("upload");

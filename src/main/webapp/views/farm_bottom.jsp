@@ -6,24 +6,27 @@
 </head>
 <!--滑动门效果-->
 	<script language="JavaScript" src="${pageContext.request.contextPath }/js/common_19.js" type="text/javascript"></script>
+	<script language="JavaScript" src="${pageContext.request.contextPath }/js/plugins/jquery/jquery.min.js" type="text/javascript"></script>
 	<!--滑动门1-->
 	<script language="JavaScript" type="text/javascript">
 		function setTag1(idx) {
 			switchmodTag('lnkTag1_', 'link07-1', 'link07-1', 'tdTag1_', 'bj_6-2-1', 'bj_5-2-1', 'TagContent1_', idx, 3);
 		}
-	</script>
-	<script language="JavaScript" type="text/javascript">
 		function setTag8(idx)
 		{
 			switchmodTag('lnkTag8_','link04','link04','tdTag8_','bj_2-1','gdce_yyp','TagContent8_',idx,3);
 		}
-		</script>
-	<script language="JavaScript" type="text/javascript">
 		function setTag7(idx)
 		{
 			switchmodTag('lnkTag7_','link04','link04','tdTag7_','bj_2-1','gdce_yyp','TagContent7_',idx,3);
 		}
-	</script>			
+		$(function(){
+			setTag1(1);
+			// setTag7(1);
+			// setTag8(1)
+		});
+	</script>
+
 	<body>
 <table width="980" border="0" align="center" cellpadding="0" cellspacing="0">
 	<tbody>
@@ -40,11 +43,11 @@
 								<table width="270" border="0" cellpadding="0" cellspacing="0">
 									<tbody>
 										<tr>
-											<td width="90" align="center" valign="middle" class="bj_6-2-1" id="tdTag1_1" onmouseover="setTag1(1)"><a
+											<td width="90" align="center" valign="middle" class="bj_5-2-1" id="tdTag1_1" onmouseover="setTag1(1)"><a
 												 href="#" target="_blank" class="link07-1" id="lnkTag1_1">农业要闻</a></td>
 											<td width="90" align="center" valign="middle" class="bj_6-2-1" id="tdTag1_2" onmouseover="setTag1(2)"><a
 												 href="#" target="_blank" class="link07-1" id="lnkTag1_2">全国信息联播</a></td>
-											<td align="center" valign="middle" class="bj_5-2-1" id="tdTag1_3" onmouseover="setTag1(3)"><a href="#"
+											<td align="center" valign="middle" class="bj_6-2-1" id="tdTag1_3" onmouseover="setTag1(3)"><a href="#"
 												 target="_blank" class="link07-1" id="lnkTag1_3">会讯公告</a></td>
 										</tr>
 									</tbody>
@@ -226,9 +229,9 @@
 											<td width="72" align="center" valign="bottom" class="gdce_yyp" id="tdTag7_1" onmousemove="setTag7(1)"><a
 												 href="./qxny/nqyw/" target="_blank" class="link04" id="lnkTag7_1">监测预警</a></td>
 											<td width="72" align="center" valign="bottom" class="bj_2-1" id="tdTag7_2" onmousemove="setTag7(2)"><a
-												 href="./kj/nyqxqb/" target="_blank" class="link04" id="lnkTag7_2">分析预测</a></td>
+												 href="./kj/nyqxqb/" target="_blank" class="link04" id="lnkTag7_2">病虫害信息</a></td>
 											<td width="72" align="center" valign="bottom" class="bj_2-1" id="tdTag7_3" onmousemove="setTag7(3)"><a
-												 href="./kj/qxzh/" target="_blank" class="link04" id="lnkTag7_3">农事指导</a></td>
+												 href="./kj/qxzh/" target="_blank" class="link04" id="lnkTag7_3">实用技术</a></td>
 										</tr>
 									</tbody>
 								</table>
@@ -296,6 +299,10 @@
 					</tbody>
 				</table>
 					</td>
+
+
+
 				</tr>
+
 			</tdoby>
 		</table>
